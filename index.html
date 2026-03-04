@@ -1,608 +1,992 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rajat Sharan | Lead SDET</title>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --bg: #06080f;
-      --surface: #0b0f1a;
-      --panel: #0f1520;
-      --border: rgba(0,220,255,0.1);
-      --accent: #00dcff;
-      --accent2: #a855f7;
-      --gold: #f59e0b;
-      --green: #10b981;
-      --text: #dde4f0;
-      --muted: #4a5e7a;
-      --glow-c: rgba(0,220,255,0.18);
-    }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      background: var(--bg); color: var(--text);
-      font-family: 'JetBrains Mono', monospace;
-      overflow-x: hidden;
-    }
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Rajat Sharan — Lead SDET</title>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg:       #f8fafc;
+  --surface:  #ffffff;
+  --panel:    #f1f5f9;
+  --border:   #e2e8f0;
+  --border2:  #cbd5e1;
+  --pass:     #16a34a;
+  --pass-bg:  #f0fdf4;
+  --pass-b:   #bbf7d0;
+  --fail:     #dc2626;
+  --warn:     #d97706;
+  --warn-bg:  #fffbeb;
+  --info:     #2563eb;
+  --info-bg:  #eff6ff;
+  --info-b:   #bfdbfe;
+  --text:     #0f172a;
+  --text2:    #334155;
+  --muted:    #64748b;
+  --dim:      #94a3b8;
+  --code:     #1e293b;
+  --code-bg:  #f8fafc;
+  --accent:   #0f766e;
+  --accent-bg:#f0fdfa;
+  --accent-b: #99f6e4;
+}
 
-    body::before {
-      content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none;
-      opacity: 0.025;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-      background-size: 200px;
-    }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+}
 
-    .bg-grid {
-      position: fixed; inset: 0; z-index: 0; pointer-events: none;
-      background-image:
-        linear-gradient(rgba(0,220,255,0.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,220,255,0.025) 1px, transparent 1px);
-      background-size: 52px 52px;
-    }
+/* ── TOPBAR ── */
+.topbar {
+  background: var(--code);
+  padding: 8px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: 'Fira Code', monospace;
+  font-size: 11px;
+}
+.tb-left { display: flex; gap: 20px; align-items: center; color: #64748b; }
+.tb-pass { color: #4ade80; display: flex; align-items: center; gap: 5px; }
+.tb-fail { color: #f87171; display: flex; align-items: center; gap: 5px; }
+.tb-pend { color: #fbbf24; display: flex; align-items: center; gap: 5px; }
+.tb-dot  { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.tb-right { color: #475569; font-size: 10px; }
 
-    .orb { position: fixed; border-radius: 50%; filter: blur(80px); pointer-events: none; z-index: 0; }
-    .orb1 { width: 500px; height: 500px; background: rgba(0,220,255,0.05); top: -150px; left: -100px; }
-    .orb2 { width: 400px; height: 400px; background: rgba(168,85,247,0.06); bottom: -100px; right: -100px; }
+/* ── NAV ── */
+nav {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+.nav-logo {
+  font-family: 'Fira Code', monospace;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--code);
+  padding: 16px 0;
+}
+.nav-logo span { color: var(--accent); }
+.nav-links { display: flex; }
+.nav-link {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted);
+  text-decoration: none;
+  padding: 18px 16px;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+  letter-spacing: 0.02em;
+}
+.nav-link:hover { color: var(--text); border-bottom-color: var(--accent); }
+.nav-cta {
+  background: var(--accent);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.2s;
+  letter-spacing: 0.02em;
+}
+.nav-cta:hover { background: #0d6660; }
 
-    .wrap { position: relative; z-index: 1; max-width: 1080px; margin: 0 auto; padding: 0 36px; }
+/* ── LAYOUT ── */
+.container { max-width: 1060px; margin: 0 auto; padding: 0 28px; }
 
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-      background: rgba(6,8,15,0.88); backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
-      padding: 14px 40px; display: flex; align-items: center; justify-content: space-between;
-    }
-    .nav-logo { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 800; color: var(--accent); letter-spacing: 0.05em; }
-    .nav-links { display: flex; gap: 28px; }
-    .nav-links a { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
-    .nav-links a:hover { color: var(--accent); }
+/* ── HERO ── */
+.hero {
+  padding: 64px 0 56px;
+  border-bottom: 1px solid var(--border);
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 60px;
+  align-items: start;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: 'Fira Code', monospace;
+  font-size: 11px;
+  color: var(--pass);
+  background: var(--pass-bg);
+  border: 1px solid var(--pass-b);
+  padding: 5px 12px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+.badge-dot {
+  width: 6px; height: 6px;
+  background: var(--pass);
+  border-radius: 50%;
+  animation: blink 2s ease infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
 
-    .hero { min-height: 100vh; display: flex; align-items: center; padding: 100px 0 60px; }
-    .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 64px; align-items: center; width: 100%; }
+h1 {
+  font-size: 2.6rem;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: 6px;
+}
+.hero-title-sub {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 16px;
+  font-family: 'Fira Code', monospace;
+}
+.hero-desc {
+  font-size: 14px;
+  color: var(--text2);
+  line-height: 1.8;
+  max-width: 520px;
+  margin-bottom: 24px;
+}
+.contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+.c-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.c-item svg { color: var(--dim); flex-shrink: 0; }
+.c-item a { color: var(--info); text-decoration: none; }
+.c-item a:hover { text-decoration: underline; }
+.hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn {
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 22px;
+  border-radius: 7px;
+  text-decoration: none;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-solid { background: var(--accent); color: #fff; }
+.btn-solid:hover { background: #0d6660; }
+.btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border2); }
+.btn-outline:hover { border-color: var(--accent); color: var(--accent); }
 
-    .badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase;
-      color: var(--accent); border: 1px solid var(--border);
-      padding: 6px 14px; border-radius: 2px; margin-bottom: 28px;
-      animation: rise 0.7s ease both;
-    }
-    .badge-dot { width: 6px; height: 6px; background: var(--green); border-radius: 50%; animation: pulse 2s ease infinite; }
-    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(1.4)} }
+/* ── SNAPSHOT CARD ── */
+.snapshot {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+}
+.snap-header {
+  background: var(--code);
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.snap-dot { width: 10px; height: 10px; border-radius: 50%; }
+.sd1{background:#ff5f57;} .sd2{background:#febc2e;} .sd3{background:#28c840;}
+.snap-title { font-family: 'Fira Code', monospace; font-size: 10px; color: #64748b; margin-left: 8px; }
+.snap-body { padding: 18px 20px; font-family: 'Fira Code', monospace; font-size: 12px; line-height: 2; }
+.sk { color: #7dd3fc; } .sv { color: #86efac; } .ss { color: #fde68a; }
+.sn { color: #f9a8d4; } .sc { color: #374151; }
+.snap-run {
+  background: var(--pass-bg);
+  border-top: 1px solid var(--pass-b);
+  padding: 12px 20px;
+  font-family: 'Fira Code', monospace;
+  font-size: 11px;
+  color: var(--pass);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.snap-run .run-right { color: var(--dim); }
+.cur { display: inline-block; width: 7px; height: 13px; background: var(--pass); vertical-align: middle; animation: cur .9s step-end infinite; }
+@keyframes cur { 0%,100%{opacity:1} 50%{opacity:0} }
 
-    h1 {
-      font-family: 'Syne', sans-serif; font-weight: 800;
-      font-size: clamp(3.2rem, 5.5vw, 5.5rem);
-      line-height: 0.92; letter-spacing: -0.03em;
-      animation: rise 0.7s 0.08s ease both;
-    }
-    h1 .solid { display: block; color: var(--text); }
-    h1 .outline { display: block; -webkit-text-stroke: 1.5px var(--accent); color: transparent; }
+/* ── STATS ROW ── */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 48px 0;
+  background: var(--border);
+}
+.stat-cell {
+  background: var(--surface);
+  padding: 24px 20px;
+  text-align: center;
+  transition: background 0.2s;
+}
+.stat-cell:hover { background: var(--panel); }
+.stat-n {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--accent);
+  display: block;
+  line-height: 1;
+  font-family: 'Fira Code', monospace;
+}
+.stat-l {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 6px;
+  display: block;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
 
-    .hero-sub {
-      margin-top: 18px; font-size: 12px; color: var(--muted); letter-spacing: 0.08em;
-      animation: rise 0.7s 0.16s ease both;
-    }
-    .hero-sub span { color: var(--gold); }
+/* ── SECTION LAYOUT ── */
+section { padding: 60px 0; border-bottom: 1px solid var(--border); }
+section:last-child { border-bottom: none; }
+.sec-label {
+  font-family: 'Fira Code', monospace;
+  font-size: 11px;
+  color: var(--accent);
+  font-weight: 500;
+  margin-bottom: 6px;
+  letter-spacing: 0.05em;
+}
+.sec-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.02em;
+  margin-bottom: 36px;
+}
 
-    .hero-desc {
-      margin-top: 20px; font-size: 12px; line-height: 2; color: #7a93b0; max-width: 460px;
-      animation: rise 0.7s 0.24s ease both;
-    }
+/* ── EXPERIENCE ── */
+.exp-list { display: flex; flex-direction: column; gap: 20px; }
+.exp-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 24px 26px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  position: relative;
+}
+.exp-card:hover { border-color: var(--accent-b); box-shadow: 0 4px 20px rgba(15,118,110,0.06); }
+.exp-card.current::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--accent);
+  border-radius: 3px 0 0 3px;
+}
+.exp-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+.exp-company {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+}
+.exp-loc {
+  font-size: 11px;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--panel);
+  padding: 3px 10px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+}
+.exp-role { font-size: 13px; color: var(--accent); font-weight: 600; margin-bottom: 3px; font-family: 'Fira Code', monospace; }
+.exp-date { font-size: 11px; color: var(--dim); margin-bottom: 14px; }
+.exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.exp-bullets li {
+  font-size: 13px;
+  color: var(--text2);
+  display: flex;
+  gap: 10px;
+  line-height: 1.7;
+}
+.exp-bullets li::before {
+  content: '✓';
+  color: var(--pass);
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+  font-size: 12px;
+}
+.exp-bullets b { color: var(--text); font-weight: 600; }
+.exp-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+.tag {
+  font-family: 'Fira Code', monospace;
+  font-size: 10px;
+  padding: 3px 9px;
+  border-radius: 4px;
+  background: var(--panel);
+  color: var(--muted);
+  border: 1px solid var(--border);
+}
 
-    .contact-row {
-      display: flex; flex-wrap: wrap; gap: 16px; margin-top: 24px;
-      animation: rise 0.7s 0.3s ease both;
-    }
-    .contact-item { font-size: 11px; color: var(--muted); display: flex; align-items: center; gap: 6px; }
-    .contact-item svg { opacity: 0.5; }
-    .contact-item a { color: var(--accent); text-decoration: none; }
-    .contact-item a:hover { text-decoration: underline; }
+/* ── TOOLKIT ── */
+.toolkit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.tk-block {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px 22px;
+  transition: border-color 0.2s;
+}
+.tk-block:hover { border-color: var(--accent-b); }
+.tk-head {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.tk-icon { font-size: 1rem; }
+.tk-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tk-tag {
+  font-family: 'Fira Code', monospace;
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 5px;
+  font-weight: 500;
+}
+.tt-green { background: var(--pass-bg); color: var(--pass); border: 1px solid var(--pass-b); }
+.tt-blue  { background: var(--info-bg); color: var(--info); border: 1px solid var(--info-b); }
+.tt-teal  { background: var(--accent-bg); color: var(--accent); border: 1px solid var(--accent-b); }
+.tt-gray  { background: var(--panel); color: var(--muted); border: 1px solid var(--border); }
 
-    .cta-row { display: flex; gap: 14px; margin-top: 30px; flex-wrap: wrap; animation: rise 0.7s 0.36s ease both; }
-    .btn {
-      font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.1em;
-      padding: 11px 22px; border-radius: 3px; text-decoration: none;
-      transition: all 0.25s; display: inline-flex; align-items: center; gap: 8px;
-    }
-    .btn-p { background: var(--accent); color: #000; font-weight: 600; }
-    .btn-p:hover { background: #fff; box-shadow: 0 0 24px var(--glow-c); }
-    .btn-g { background: transparent; color: var(--text); border: 1px solid var(--border); }
-    .btn-g:hover { border-color: var(--accent); color: var(--accent); }
+/* ── SKILL BARS ── */
+.skill-list { display: flex; flex-direction: column; gap: 14px; }
+.skill-item {}
+.skill-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+.skill-name { font-size: 13px; font-weight: 500; color: var(--text2); }
+.skill-pct { font-family: 'Fira Code', monospace; font-size: 12px; color: var(--accent); font-weight: 600; }
+.skill-bar { height: 6px; background: var(--panel); border-radius: 3px; overflow: hidden; border: 1px solid var(--border); }
+.skill-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, var(--accent), #0d9488); transition: width 1.4s ease; width: 0; }
 
-    .term {
-      background: #080d14; border: 1px solid var(--border); border-radius: 8px;
-      overflow: hidden; box-shadow: 0 0 40px var(--glow-c), 0 40px 80px rgba(0,0,0,0.6);
-      animation: rise 0.7s 0.2s ease both;
-    }
-    .term-bar {
-      background: #0e1520; padding: 11px 16px; border-bottom: 1px solid var(--border);
-      display: flex; align-items: center; gap: 7px;
-    }
-    .dot { width: 11px; height: 11px; border-radius: 50%; }
-    .dr{background:#ff5f57;} .dy{background:#febc2e;} .dg{background:#28c840;}
-    .term-ttl { font-size: 10px; color: var(--muted); margin-left: 8px; letter-spacing: 0.08em; }
-    .term-body { padding: 22px 24px; font-size: 12px; line-height: 2.1; }
-    .tc { color: #2d4060; } .tk { color: var(--accent2); } .ts { color: var(--gold); }
-    .tv { color: var(--accent); } .tn { color: #f87171; }
-    .tcur {
-      display: inline-block; width: 7px; height: 14px; background: var(--accent);
-      vertical-align: middle; animation: blink 1.1s step-end infinite;
-    }
-    @keyframes blink { 0%,100%{opacity:1}50%{opacity:0} }
+/* ── PROJECTS ── */
+.proj-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.proj-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+.proj-card:hover { border-color: var(--accent-b); box-shadow: 0 4px 16px rgba(15,118,110,0.08); transform: translateY(-2px); }
+.pc-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.pc-icon { font-size: 1.4rem; }
+.pc-status { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 20px; background: var(--pass-bg); color: var(--pass); border: 1px solid var(--pass-b); font-family: 'Fira Code', monospace; }
+.pc-name { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 7px; }
+.pc-desc { font-size: 12px; color: var(--muted); line-height: 1.7; margin-bottom: 12px; }
+.pc-link { font-size: 11px; color: var(--info); text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 5px; }
+.pc-link:hover { text-decoration: underline; }
 
-    .stats {
-      display: grid; grid-template-columns: repeat(4,1fr);
-      border: 1px solid var(--border); border-radius: 6px; overflow: hidden;
-      background: var(--border); gap: 1px; margin: 56px 0;
-    }
-    .stat { background: var(--surface); padding: 28px 16px; text-align: center; transition: background 0.3s; }
-    .stat:hover { background: #0d1a28; }
-    .sn {
-      font-family: 'Syne', sans-serif; font-size: 2.6rem; font-weight: 800;
-      color: var(--accent); display: block; line-height: 1;
-      text-shadow: 0 0 20px rgba(0,220,255,0.4);
-    }
-    .sl { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-top: 6px; display: block; }
+.repo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.repo-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px 20px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  transition: all 0.2s;
+}
+.repo-card:hover { border-color: var(--accent-b); box-shadow: 0 3px 12px rgba(15,118,110,0.07); }
+.repo-icon { font-size: 1.5rem; flex-shrink: 0; }
+.repo-name { font-size: 13px; font-weight: 700; color: var(--info); margin-bottom: 4px; }
+.repo-desc { font-size: 11px; color: var(--muted); line-height: 1.6; }
+.repo-arrow { margin-left: auto; color: var(--dim); font-size: 16px; }
 
-    section { padding: 72px 0; }
-    .eyebrow { font-size: 9px; letter-spacing: 0.35em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
-    .sec-title {
-      font-family: 'Syne', sans-serif; font-size: clamp(1.7rem,3vw,2.6rem);
-      font-weight: 800; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 44px;
-    }
-    .sec-title em { font-style: normal; color: var(--accent); }
+/* ── CERTS ── */
+.cert-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+.cert-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  transition: border-color 0.2s;
+}
+.cert-card:hover { border-color: var(--accent-b); }
+.cert-icon { font-size: 1.5rem; flex-shrink: 0; }
+.cert-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.cert-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+.cert-badge {
+  margin-left: auto;
+  font-family: 'Fira Code', monospace;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: var(--pass-bg);
+  color: var(--pass);
+  border: 1px solid var(--pass-b);
+  flex-shrink: 0;
+}
+.edu-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 14px;
+  max-width: 500px;
+}
+.edu-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.edu-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
 
-    .toolkit-cats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .tk-cat {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: 6px; padding: 22px 24px;
-      transition: border-color 0.3s, transform 0.3s;
-      position: relative; overflow: hidden;
-    }
-    .tk-cat::before {
-      content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
-      background: linear-gradient(to bottom, var(--accent), var(--accent2));
-      transform: scaleY(0); transform-origin: top; transition: transform 0.3s;
-    }
-    .tk-cat:hover { border-color: rgba(0,220,255,0.25); transform: translateX(4px); }
-    .tk-cat:hover::before { transform: scaleY(1); }
-    .tk-label { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
-    .tk-items { font-size: 11px; color: #7a93b0; line-height: 2; }
+/* ── ACHIEVEMENT QUOTE ── */
+.achievement {
+  background: linear-gradient(135deg, var(--accent-bg), var(--pass-bg));
+  border: 1px solid var(--accent-b);
+  border-radius: 12px;
+  padding: 24px 28px;
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  margin: 36px 0;
+}
+.ach-icon { font-size: 1.8rem; flex-shrink: 0; }
+.ach-text { font-size: 14px; color: var(--text2); line-height: 1.8; font-style: italic; }
+.ach-text b { color: var(--text); font-style: normal; }
+.ach-cite { font-size: 11px; color: var(--muted); margin-top: 6px; font-family: 'Fira Code', monospace; }
 
-    .exp-list { display: flex; flex-direction: column; gap: 24px; }
-    .exp-card {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: 6px; padding: 28px 30px;
-      transition: border-color 0.3s, box-shadow 0.3s;
-      position: relative;
-    }
-    .exp-card:hover { border-color: rgba(0,220,255,0.25); box-shadow: 0 0 30px var(--glow-c); }
-    .exp-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px; margin-bottom: 4px; }
-    .exp-company { font-family: 'Syne', sans-serif; font-size: 1.05rem; font-weight: 700; }
-    .exp-loc { font-size: 10px; color: var(--muted); display: flex; align-items: center; gap: 5px; }
-    .exp-role { font-size: 11px; color: var(--accent); letter-spacing: 0.05em; margin-bottom: 4px; }
-    .exp-dates { font-size: 10px; color: var(--gold); letter-spacing: 0.1em; margin-bottom: 14px; }
-    .exp-card ul { padding-left: 18px; }
-    .exp-card li { font-size: 11px; color: #7a93b0; line-height: 1.9; margin-bottom: 4px; }
-    .exp-card li b { color: var(--text); font-weight: 600; }
-    .exp-tag {
-      position: absolute; top: 20px; right: 20px;
-      font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase;
-      padding: 3px 10px; border-radius: 20px; border: 1px solid var(--border); color: var(--muted);
-    }
+/* ── GH STATS ── */
+.gh-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.gh-img { width: 100%; border-radius: 8px; border: 1px solid var(--border); transition: border-color 0.2s; }
+.gh-img:hover { border-color: var(--accent-b); }
 
-    .proj-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
-    .proj-card {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: 6px; padding: 24px 22px;
-      transition: all 0.3s; position: relative; overflow: hidden;
-    }
-    .proj-card::after {
-      content: ''; position: absolute; inset: 0;
-      background: radial-gradient(circle at 80% 0%, rgba(0,220,255,0.06), transparent 60%);
-      opacity: 0; transition: opacity 0.3s;
-    }
-    .proj-card:hover { border-color: rgba(0,220,255,0.3); transform: translateY(-3px); }
-    .proj-card:hover::after { opacity: 1; }
-    .proj-icon { font-size: 1.5rem; margin-bottom: 12px; }
-    .proj-name { font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 700; margin-bottom: 8px; }
-    .proj-desc { font-size: 11px; color: #7a93b0; line-height: 1.8; }
+/* ── FOOTER ── */
+footer {
+  background: var(--code);
+  padding: 40px 0;
+  text-align: center;
+}
+.f-name { font-size: 1.2rem; font-weight: 700; color: #e2e8f0; letter-spacing: -0.01em; }
+.f-name span { color: #4ade80; font-family: 'Fira Code', monospace; }
+.f-sub { font-family: 'Fira Code', monospace; font-size: 11px; color: #475569; margin-top: 6px; }
+.f-links { display: flex; gap: 20px; justify-content: center; margin-top: 16px; }
+.f-links a { font-size: 12px; color: #64748b; text-decoration: none; transition: color 0.2s; }
+.f-links a:hover { color: #4ade80; }
+.f-copy { font-size: 11px; color: #334155; margin-top: 14px; }
 
-    .cert-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
-    .cert-item {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: 5px; padding: 16px 20px;
-      display: flex; align-items: center; gap: 14px;
-      transition: border-color 0.3s;
-    }
-    .cert-item:hover { border-color: rgba(0,220,255,0.3); }
-    .cert-icon { font-size: 1.4rem; flex-shrink: 0; }
-    .cert-name { font-size: 11px; font-weight: 600; color: var(--text); }
-    .cert-body { font-size: 10px; color: var(--muted); margin-top: 2px; }
+/* ── REVEAL ── */
+.rv { opacity: 0; transform: translateY(18px); transition: opacity 0.5s ease, transform 0.5s ease; }
+.rv.show { opacity: 1; transform: none; }
 
-    .quote {
-      border-left: 2px solid var(--accent); padding: 22px 28px;
-      background: var(--surface); border-radius: 0 6px 6px 0; margin: 56px 0;
-      position: relative;
-    }
-    .quote::before {
-      content: '"'; font-family: 'Syne', sans-serif; font-size: 5rem;
-      color: var(--accent); opacity: 0.08; position: absolute;
-      top: -8px; left: 16px; line-height: 1;
-    }
-    .quote p { font-size: 14px; line-height: 1.9; font-style: italic; color: #b0c4d8; }
-    .quote cite { font-size: 10px; color: var(--muted); margin-top: 8px; display: block; letter-spacing: 0.12em; text-transform: uppercase; }
-
-    .gh-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-    .gh-img { width: 100%; border-radius: 6px; border: 1px solid var(--border); transition: box-shadow 0.3s; }
-    .gh-img:hover { box-shadow: 0 0 28px var(--glow-c); }
-
-    footer { border-top: 1px solid var(--border); padding: 48px 0; text-align: center; }
-    .f-name { font-family: 'Syne', sans-serif; font-size: 1.8rem; font-weight: 800; letter-spacing: -0.02em; }
-    .f-name span { color: var(--accent); }
-    .f-links { display: flex; gap: 24px; justify-content: center; margin-top: 18px; flex-wrap: wrap; }
-    .f-links a { font-size: 11px; color: var(--muted); text-decoration: none; letter-spacing: 0.12em; text-transform: uppercase; transition: color 0.2s; }
-    .f-links a:hover { color: var(--accent); }
-    .f-copy { font-size: 10px; color: #1e2d3d; margin-top: 18px; letter-spacing: 0.1em; }
-
-    .r { opacity: 0; transform: translateY(22px); transition: opacity 0.6s ease, transform 0.6s ease; }
-    .r.v { opacity: 1; transform: none; }
-    @keyframes rise { from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none} }
-
-    @media(max-width:768px){
-      .hero-grid{grid-template-columns:1fr}
-      .stats{grid-template-columns:1fr 1fr}
-      .toolkit-cats{grid-template-columns:1fr}
-      .proj-grid{grid-template-columns:1fr}
-      .gh-grid{grid-template-columns:1fr}
-      .cert-grid{grid-template-columns:1fr}
-      .nav-links{display:none}
-    }
-  </style>
+@media(max-width: 768px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .stats-row { grid-template-columns: 1fr 1fr; }
+  .toolkit-grid { grid-template-columns: 1fr; }
+  .proj-grid { grid-template-columns: 1fr; }
+  .cert-grid { grid-template-columns: 1fr; }
+  .gh-grid { grid-template-columns: 1fr; }
+  .repo-grid { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  h1 { font-size: 2rem; }
+}
+</style>
 </head>
 <body>
 
-  <div class="bg-grid"></div>
-  <div class="orb orb1"></div>
-  <div class="orb orb2"></div>
+<!-- TOP STATUS BAR -->
+<div class="topbar">
+  <div class="tb-left">
+    <span style="color:#94a3b8; letter-spacing:.05em;">rajat-sharan / test-suite</span>
+    <span class="tb-pass"><span class="tb-dot"></span> 47 passed</span>
+    <span class="tb-fail"><span class="tb-dot"></span> 0 failed</span>
+    <span class="tb-pend"><span class="tb-dot"></span> 2 pending</span>
+  </div>
+  <div class="tb-right" id="topbar-clock">Loading...</div>
+</div>
 
-  <nav>
-    <div class="nav-logo">RS_</div>
-    <div class="nav-links">
-      <a href="#toolkit">Toolkit</a>
-      <a href="#experience">Experience</a>
-      <a href="#projects">Projects</a>
-      <a href="#certs">Certs</a>
-      <a href="#github">GitHub</a>
-    </div>
-  </nav>
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">rajat.<span>sdet</span>()</div>
+  <div class="nav-links">
+    <a href="#experience" class="nav-link">Experience</a>
+    <a href="#toolkit" class="nav-link">Toolkit</a>
+    <a href="#projects" class="nav-link">Projects</a>
+    <a href="#certs" class="nav-link">Certifications</a>
+    <a href="#github" class="nav-link">GitHub</a>
+  </div>
+  <a href="https://www.linkedin.com/in/rajatsharan-15a19244" target="_blank" class="nav-cta">↗ Connect</a>
+</nav>
 
-  <div class="hero">
-    <div class="wrap">
-      <div class="hero-grid">
-        <div>
-          <div class="badge"><span class="badge-dot"></span> Available · Lead SDET</div>
-          <h1>
-            <span class="solid">RAJAT</span>
-            <span class="outline">SHARAN</span>
-          </h1>
-          <p class="hero-sub">TypeScript · Playwright · CI/CD · <span>Agentic AI Testing</span></p>
-          <p class="hero-desc">
-            Strategic Lead SDET with <b>11+ years</b> delivering enterprise-scale automation ecosystems. Expert in architecting scalable TypeScript frameworks and driving migrations that accelerate release cycles. Currently engineering quality for Tier-1 Aviation &amp; FinTech at <b>Coforge</b>.
-          </p>
-          <div class="contact-row">
-            <span class="contact-item">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-              Noida, India
-            </span>
-            <span class="contact-item">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13 19.79 19.79 0 0 1 1.61 4.38 2 2 0 0 1 3.59 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.06 6.06l1.97-1.97a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-              +91-8692985111
-            </span>
-            <span class="contact-item">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-              errajatsharan@gmail.com
-            </span>
-            <span class="contact-item">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-              <a href="https://www.linkedin.com/in/rajatsharan-15a19244" target="_blank">LinkedIn</a>
-            </span>
-            <span class="contact-item">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-              <a href="https://rajatsharan.github.io/Profile/" target="_blank">Portfolio</a>
-            </span>
+<!-- HERO -->
+<div class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-badge"><span class="badge-dot"></span> Available · Lead SDET</div>
+        <h1>Rajat Sharan</h1>
+        <div class="hero-title-sub">Lead SDET &amp; Automation Architect</div>
+        <p class="hero-desc">
+          Strategic quality engineer with <strong>11+ years</strong> building enterprise-scale automation ecosystems. Specialized in TypeScript frameworks, CI/CD pipelines, and AI-augmented testing. Delivered quality for Tier-1 Aviation &amp; FinTech clients at Coforge — including 2 years onsite in London.
+        </p>
+        <div class="contact-list">
+          <div class="c-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Noida, India
           </div>
-          <div class="cta-row">
-            <a href="https://www.linkedin.com/in/rajatsharan-15a19244" class="btn btn-p" target="_blank">↗ Connect on LinkedIn</a>
-            <a href="https://rajatsharan.github.io/Profile/" class="btn btn-g" target="_blank">View Portfolio</a>
+          <div class="c-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13 19.79 19.79 0 0 1 1.61 4.38 2 2 0 0 1 3.59 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.06 6.06l1.97-1.97a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            +91-8692985111
+          </div>
+          <div class="c-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <a href="mailto:errajatsharan@gmail.com">errajatsharan@gmail.com</a>
+          </div>
+          <div class="c-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            <a href="https://www.linkedin.com/in/rajatsharan-15a19244" target="_blank">linkedin.com/in/rajatsharan-15a19244</a>
+          </div>
+          <div class="c-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            <a href="https://rajatsharan.github.io/Profile/" target="_blank">rajatsharan.github.io/Profile</a>
           </div>
         </div>
+        <div class="hero-btns">
+          <a href="https://www.linkedin.com/in/rajatsharan-15a19244" target="_blank" class="btn btn-solid">↗ LinkedIn Profile</a>
+          <a href="https://rajatsharan.github.io/Profile/" target="_blank" class="btn btn-outline">View Portfolio</a>
+        </div>
+      </div>
 
-        <div class="term">
-          <div class="term-bar">
-            <div class="dot dr"></div><div class="dot dy"></div><div class="dot dg"></div>
-            <span class="term-ttl">~/rajat $ node profile.js</span>
+      <!-- TERMINAL SNAPSHOT -->
+      <div class="snapshot">
+        <div class="snap-header">
+          <div class="snap-dot sd1"></div>
+          <div class="snap-dot sd2"></div>
+          <div class="snap-dot sd3"></div>
+          <span class="snap-title">profile.spec.ts — Playwright</span>
+        </div>
+        <div class="snap-body">
+          <div><span class="sc">// Engineer snapshot</span></div><br>
+          <div><span class="sk">const</span> engineer = {</div>
+          <div>&nbsp;&nbsp;<span class="sk">name</span>: <span class="ss">"Rajat Sharan"</span>,</div>
+          <div>&nbsp;&nbsp;<span class="sk">role</span>: <span class="ss">"Lead SDET"</span>,</div>
+          <div>&nbsp;&nbsp;<span class="sk">company</span>: <span class="ss">"Coforge"</span>,</div>
+          <div>&nbsp;&nbsp;<span class="sk">experience</span>: <span class="sn">11</span>,&nbsp;<span class="sc">// years</span></div>
+          <div>&nbsp;&nbsp;<span class="sk">onsite</span>: <span class="ss">"London 🇬🇧"</span>,</div>
+          <div>&nbsp;&nbsp;<span class="sk">domains</span>: [<span class="ss">"Aviation"</span>,</div>
+          <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="ss">"FinTech"</span>, <span class="ss">"HealthTech"</span>],</div>
+          <div>&nbsp;&nbsp;<span class="sk">coverage</span>: <span class="sv">98</span>,</div>
+          <div>&nbsp;&nbsp;<span class="sk">ai_testing</span>: <span class="sv">true</span></div>
+          <div>};<span class="cur"></span></div>
+        </div>
+        <div class="snap-run">
+          <span>✓ 47 passing · 0 failing · 13.4s</span>
+          <span class="run-right">playwright v1.40</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- STATS -->
+    <div class="stats-row rv">
+      <div class="stat-cell">
+        <span class="stat-n" data-target="11" data-sfx="+">0</span>
+        <span class="stat-l">Years Experience</span>
+      </div>
+      <div class="stat-cell">
+        <span class="stat-n" data-target="55" data-sfx="%">0</span>
+        <span class="stat-l">Faster Release Cycles</span>
+      </div>
+      <div class="stat-cell">
+        <span class="stat-n" data-target="98" data-sfx="%">0</span>
+        <span class="stat-l">Production Uptime</span>
+      </div>
+      <div class="stat-cell">
+        <span class="stat-n" data-target="500" data-sfx="+">0</span>
+        <span class="stat-l">API Endpoints Covered</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <p class="sec-label rv">// 01 — Experience</p>
+    <h2 class="sec-title rv">Professional History</h2>
+    <div class="exp-list">
+
+      <div class="exp-card current rv">
+        <div class="exp-top">
+          <div>
+            <div class="exp-company">Coforge</div>
+            <div class="exp-role">Senior Test Specialist (Lead SDET)</div>
+            <div class="exp-date">Oct 2022 — Present</div>
           </div>
-          <div class="term-body">
-            <div class="tc">// Lead SDET · Automation Architect</div><br>
-            <div><span class="tk">const</span> <span class="tv">profile</span> = {</div>
-            <div>&nbsp;&nbsp;<span class="tk">name</span>: <span class="ts">"Rajat Sharan"</span>,</div>
-            <div>&nbsp;&nbsp;<span class="tk">role</span>: <span class="ts">"Lead SDET"</span>,</div>
-            <div>&nbsp;&nbsp;<span class="tk">company</span>: <span class="ts">"Coforge"</span>,</div>
-            <div>&nbsp;&nbsp;<span class="tk">experience</span>: <span class="tn">11</span>, <span class="tc">// years</span></div>
-            <div>&nbsp;&nbsp;<span class="tk">onsite</span>: <span class="ts">"London 🇬🇧"</span>,</div>
-            <div>&nbsp;&nbsp;<span class="tk">domains</span>: [</div>
-            <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="ts">"Aviation"</span>, <span class="ts">"FinTech"</span>,</div>
-            <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="ts">"HealthTech"</span>, <span class="ts">"E-Commerce"</span></div>
-            <div>&nbsp;&nbsp;],</div>
-            <div>&nbsp;&nbsp;<span class="tk">uptime</span>: <span class="ts">"98%"</span>,</div>
-            <div>&nbsp;&nbsp;<span class="tk">superpower</span>: <span class="ts">"Agentic AI QA"</span></div>
-            <div>};</div><br>
-            <div><span class="tc">// ✅ Ready.</span> <span class="tcur"></span></div>
+          <div class="exp-loc">📍 Noida, India &nbsp;<span style="background:#dcfce7;color:#16a34a;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:700;">CURRENT</span></div>
+        </div>
+        <ul class="exp-bullets">
+          <li><b>Architected</b> migration of legacy Cypress suites to Playwright + TypeScript, reducing maintenance overhead by 40%.</li>
+          <li><b>Established SonarQube quality gates</b> within GitLab CI/CD pipelines, cutting production defect leakage by 45%.</li>
+          <li><b>Managed a 4-member QA team</b> while remaining 80% hands-on across complex microservices automation.</li>
+          <li><b>Pioneered Generative AI integration</b> to automate synthetic test data for non-deterministic FinTech workflows.</li>
+          <li><b>Drove Sprint Velocity</b> via QA estimations and proactive risk mitigation during Agile ceremonies.</li>
+        </ul>
+        <div class="exp-tags">
+          <span class="tag">Playwright</span><span class="tag">TypeScript</span><span class="tag">GitLab CI</span><span class="tag">SonarQube</span><span class="tag">GenAI</span><span class="tag">Docker</span>
+        </div>
+      </div>
+
+      <div class="exp-card rv">
+        <div class="exp-top">
+          <div>
+            <div class="exp-company">Dotsquares</div>
+            <div class="exp-role">QA Automation Specialist</div>
+            <div class="exp-date">Jun 2016 — Oct 2022</div>
           </div>
+          <div class="exp-loc">📍 London, UK 🇬🇧</div>
+        </div>
+        <ul class="exp-bullets">
+          <li><b>Designed scalable BDD frameworks</b> using Cypress and WebdriverIO — 80% coverage across 15+ global finance and e-commerce platforms.</li>
+          <li><b>Engineered API automation suites</b> validating 500+ endpoints via REST Assured with 100% regression accuracy.</li>
+          <li><b>Optimised regression cycles by 55%</b> through Docker containerisation and parallel execution on AWS.</li>
+          <li><b>Reduced post-release hotfixes by 20%</b> by collaborating with Product Owners on Shift-Left testing strategies.</li>
+        </ul>
+        <div class="exp-tags">
+          <span class="tag">Cypress</span><span class="tag">WebdriverIO</span><span class="tag">REST Assured</span><span class="tag">BDD</span><span class="tag">Docker</span><span class="tag">AWS</span>
+        </div>
+      </div>
+
+      <div class="exp-card rv">
+        <div class="exp-top">
+          <div>
+            <div class="exp-company">Datamatics Global Services Limited</div>
+            <div class="exp-role">Software Test Engineer</div>
+            <div class="exp-date">Jul 2014 — Oct 2016</div>
+          </div>
+          <div class="exp-loc">📍 Mumbai, India</div>
+        </div>
+        <ul class="exp-bullets">
+          <li><b>Validated enterprise CRM systems</b>, ensuring 100% requirement traceability across 10+ major production releases.</li>
+          <li><b>Executed SQL backend verification</b>, identifying critical data synchronisation issues missed by UI testing.</li>
+        </ul>
+        <div class="exp-tags">
+          <span class="tag">Manual Testing</span><span class="tag">SQL</span><span class="tag">CRM</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="achievement rv">
+      <div class="ach-icon">🏆</div>
+      <div>
+        <div class="ach-text">"<b>Architected a Cypress-to-Playwright migration</b> that reduced release regression cycles by 55% — delivered across Tier-1 Aviation and FinTech clients with 98% maintained production stability."</div>
+        <div class="ach-cite">— Flagship Achievement · Coforge · Aviation &amp; FinTech Division</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLKIT -->
+<section id="toolkit">
+  <div class="container">
+    <p class="sec-label rv">// 02 — Skills</p>
+    <h2 class="sec-title rv">Technical Toolkit</h2>
+
+    <div class="toolkit-grid rv">
+      <div class="tk-block">
+        <div class="tk-head"><span class="tk-icon">🎭</span> Automation Architecture</div>
+        <div class="tk-tags">
+          <span class="tk-tag tt-teal">Playwright</span>
+          <span class="tk-tag tt-teal">Cypress</span>
+          <span class="tk-tag tt-teal">WebdriverIO</span>
+          <span class="tk-tag tt-teal">Selenium</span>
+          <span class="tk-tag tt-teal">POM</span>
+          <span class="tk-tag tt-teal">BDD / Cucumber</span>
+          <span class="tk-tag tt-teal">REST Assured</span>
+        </div>
+      </div>
+      <div class="tk-block">
+        <div class="tk-head"><span class="tk-icon">💻</span> Languages &amp; AI</div>
+        <div class="tk-tags">
+          <span class="tk-tag tt-blue">TypeScript</span>
+          <span class="tk-tag tt-blue">JavaScript</span>
+          <span class="tk-tag tt-blue">Java</span>
+          <span class="tk-tag tt-blue">SQL</span>
+          <span class="tk-tag tt-blue">GenAI Testing</span>
+          <span class="tk-tag tt-blue">Agentic AI QA</span>
+        </div>
+      </div>
+      <div class="tk-block">
+        <div class="tk-head"><span class="tk-icon">⚙️</span> DevOps &amp; Cloud</div>
+        <div class="tk-tags">
+          <span class="tk-tag tt-green">GitLab CI/CD</span>
+          <span class="tk-tag tt-green">GitHub Actions</span>
+          <span class="tk-tag tt-green">Docker</span>
+          <span class="tk-tag tt-green">Jenkins</span>
+          <span class="tk-tag tt-green">SonarQube</span>
+          <span class="tk-tag tt-green">AWS</span>
+        </div>
+      </div>
+      <div class="tk-block">
+        <div class="tk-head"><span class="tk-icon">📋</span> Domain &amp; Management</div>
+        <div class="tk-tags">
+          <span class="tk-tag tt-gray">Aviation (PSS)</span>
+          <span class="tk-tag tt-gray">FinTech</span>
+          <span class="tk-tag tt-gray">HealthTech</span>
+          <span class="tk-tag tt-gray">JIRA</span>
+          <span class="tk-tag tt-gray">TestRail</span>
+          <span class="tk-tag tt-gray">Zephyr</span>
+          <span class="tk-tag tt-gray">Agile / Scrum</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 32px;" class="rv">
+      <div class="skill-list" style="max-width: 600px;">
+        <div class="skill-item">
+          <div class="skill-top"><span class="skill-name">Playwright / TypeScript</span><span class="skill-pct">98%</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-w="98"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-top"><span class="skill-name">REST Assured / API Testing</span><span class="skill-pct">96%</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-w="96"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-top"><span class="skill-name">CI/CD · GitLab · Docker</span><span class="skill-pct">92%</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-w="92"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-top"><span class="skill-name">Cypress · WebdriverIO</span><span class="skill-pct">90%</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-w="90"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-top"><span class="skill-name">GenAI / Agentic Testing</span><span class="skill-pct">78%</span></div>
+          <div class="skill-bar"><div class="skill-fill" data-w="78"></div></div>
         </div>
       </div>
     </div>
   </div>
+</section>
 
-  <div class="wrap">
-    <div class="stats r">
-      <div class="stat"><span class="sn" data-target="11" data-sfx="+">0</span><span class="sl">Years Experience</span></div>
-      <div class="stat"><span class="sn" data-target="55" data-sfx="%">0</span><span class="sl">Faster Release Cycles</span></div>
-      <div class="stat"><span class="sn" data-target="98" data-sfx="%">0</span><span class="sl">Production Uptime</span></div>
-      <div class="stat"><span class="sn" data-target="500" data-sfx="+">0</span><span class="sl">API Endpoints Covered</span></div>
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <p class="sec-label rv">// 03 — Work</p>
+    <h2 class="sec-title rv">Strategic Projects</h2>
+
+    <div class="proj-grid rv">
+      <div class="proj-card">
+        <div class="pc-top"><span class="pc-icon">✈️</span><span class="pc-status">PASS</span></div>
+        <div class="pc-name">Emirates Passenger Service System</div>
+        <div class="pc-desc">Architected E2E validation for global Reservation and Loyalty (Skywards) modules on Emirates PSS.</div>
+        <div class="exp-tags" style="margin-bottom:12px;"><span class="tag">Playwright</span><span class="tag">Aviation</span><span class="tag">E2E</span></div>
+      </div>
+      <div class="proj-card">
+        <div class="pc-top"><span class="pc-icon">🔐</span><span class="pc-status">PASS</span></div>
+        <div class="pc-name">Shieldpay Secure Payments</div>
+        <div class="pc-desc">Engineered validation for multi-party escrow transfers ensuring 100% financial integrity across all flows.</div>
+        <div class="exp-tags" style="margin-bottom:12px;"><span class="tag">REST Assured</span><span class="tag">FinTech</span><span class="tag">API</span></div>
+      </div>
+      <div class="proj-card">
+        <div class="pc-top"><span class="pc-icon">🏥</span><span class="pc-status">PASS</span></div>
+        <div class="pc-name">Bupa Healthcare Claims</div>
+        <div class="pc-desc">Developed validation strategies for insurance claim processing and end-to-end regulatory compliance.</div>
+        <div class="exp-tags" style="margin-bottom:12px;"><span class="tag">BDD</span><span class="tag">HealthTech</span><span class="tag">Compliance</span></div>
+      </div>
+    </div>
+
+    <p class="sec-label rv" style="margin-bottom:14px;">// Open Source</p>
+    <div class="repo-grid rv">
+      <a href="https://github.com/RajatSharan/Playwright_Automation" target="_blank" class="repo-card">
+        <span class="repo-icon">🎭</span>
+        <div>
+          <div class="repo-name">Playwright_Automation</div>
+          <div class="repo-desc">Enterprise E2E framework · TypeScript · POM · Allure · GitLab CI</div>
+        </div>
+        <span class="repo-arrow">↗</span>
+      </a>
+      <a href="https://github.com/RajatSharan/Rest_Assured" target="_blank" class="repo-card">
+        <span class="repo-icon">⚡</span>
+        <div>
+          <div class="repo-name">Rest_Assured</div>
+          <div class="repo-desc">Hybrid data-driven API testing · Java · TestNG · Maven</div>
+        </div>
+        <span class="repo-arrow">↗</span>
+      </a>
     </div>
   </div>
+</section>
 
-  <section id="toolkit">
-    <div class="wrap">
-      <p class="eyebrow r">// 01 — Arsenal</p>
-      <h2 class="sec-title r">Technical <em>Toolkit</em></h2>
-      <div class="toolkit-cats r">
-        <div class="tk-cat">
-          <div class="tk-label">Automation Architecture</div>
-          <div class="tk-items">Playwright · Cypress · WebdriverIO · Selenium · POM · BDD (Cucumber) · REST Assured</div>
-        </div>
-        <div class="tk-cat">
-          <div class="tk-label">Programming &amp; AI</div>
-          <div class="tk-items">TypeScript · JavaScript · SQL (Backend) · Agentic AI Testing · GenAI for Synthetic Data</div>
-        </div>
-        <div class="tk-cat">
-          <div class="tk-label">DevOps &amp; Cloud</div>
-          <div class="tk-items">GitLab CI/CD · GitHub Actions · Docker · Jenkins · SonarQube · AWS Cloud Execution</div>
-        </div>
-        <div class="tk-cat">
-          <div class="tk-label">Domain &amp; Management</div>
-          <div class="tk-items">Aviation (PSS) · FinTech (Escrow/Payments) · HealthTech (Claims) · JIRA · TestRail · Zephyr · Agile/Scrum</div>
-        </div>
-      </div>
-    </div>
-  </section>
+<!-- CERTS -->
+<section id="certs">
+  <div class="container">
+    <p class="sec-label rv">// 04 — Credentials</p>
+    <h2 class="sec-title rv">Certifications &amp; Education</h2>
 
-  <section id="experience">
-    <div class="wrap">
-      <p class="eyebrow r">// 02 — Career</p>
-      <h2 class="sec-title r">Professional <em>Experience</em></h2>
-      <div class="exp-list">
-        <div class="exp-card r">
-          <span class="exp-tag">Current</span>
-          <div class="exp-header">
-            <div>
-              <div class="exp-company">Coforge</div>
-              <div class="exp-role">Senior Test Specialist (Lead SDET)</div>
-              <div class="exp-dates">Oct 2022 — Present</div>
-            </div>
-            <div class="exp-loc">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-              Noida, India
-            </div>
-          </div>
-          <ul>
-            <li><b>Architected the strategic migration</b> of legacy Cypress suites to a modern Playwright + TypeScript framework, enhancing execution reliability and reducing maintenance overhead by 40%.</li>
-            <li><b>Established SonarQube quality gates</b> within GitLab CI/CD pipelines, reducing production defect leakage by 45% by enforcing strict "Definition of Done" standards.</li>
-            <li><b>Managed a 4-member QA team</b> while remaining 80% hands-on in developing automation for complex microservices.</li>
-            <li><b>Pioneered Generative AI integration</b> to automate synthetic test data generation, increasing coverage for non-deterministic FinTech workflows.</li>
-            <li><b>Drove Sprint Velocity</b> by leading QA estimations and proactive risk mitigation during Agile ceremonies.</li>
-          </ul>
-        </div>
-
-        <div class="exp-card r">
-          <div class="exp-header">
-            <div>
-              <div class="exp-company">Dotsquares</div>
-              <div class="exp-role">QA Automation Specialist</div>
-              <div class="exp-dates">June 2016 — Oct 2022</div>
-            </div>
-            <div class="exp-loc">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-              London, UK 🇬🇧
-            </div>
-          </div>
-          <ul>
-            <li><b>Designed scalable BDD frameworks</b> using Cypress and WebdriverIO, achieving 80% automation coverage across 15+ global finance and e-commerce platforms.</li>
-            <li><b>Engineered API automation suites</b> validating 500+ endpoints using REST Assured, ensuring 100% regression accuracy for high-frequency deployments.</li>
-            <li><b>Optimized regression cycles by 55%</b> through Docker-based containerization and parallel execution in AWS.</li>
-            <li><b>Reduced post-release hotfixes by 20%</b> by collaborating with Product Owners to implement early-stage "Shift-Left" testing strategies.</li>
-          </ul>
-        </div>
-
-        <div class="exp-card r">
-          <div class="exp-header">
-            <div>
-              <div class="exp-company">Datamatics Global Services Limited</div>
-              <div class="exp-role">Software Test Engineer</div>
-              <div class="exp-dates">July 2014 — Oct 2016</div>
-            </div>
-            <div class="exp-loc">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-              Mumbai, India
-            </div>
-          </div>
-          <ul>
-            <li><b>Validated enterprise CRM systems</b>, ensuring 100% requirement traceability for 10+ major production releases.</li>
-            <li><b>Executed complex SQL backend verification</b>, identifying critical data synchronization issues missed by UI testing.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="quote r">
-        <p>Architected a Cypress-to-Playwright migration that optimised release regression cycles by 55% — validated across Tier-1 Aviation and FinTech clients with maintained 98% production stability post-launch.</p>
-        <cite>— Flagship Achievement · Coforge · Aviation &amp; FinTech Division</cite>
-      </div>
-    </div>
-  </section>
-
-  <section id="projects">
-    <div class="wrap">
-      <p class="eyebrow r">// 03 — Strategic Projects</p>
-      <h2 class="sec-title r">Project <em>Leadership</em></h2>
-      <div class="proj-grid r">
-        <div class="proj-card">
-          <div class="proj-icon">✈️</div>
-          <div class="proj-name">Emirates Passenger Service</div>
-          <p class="proj-desc">Architected E2E validation for global Reservation and Loyalty (Skywards) modules on the Emirates PSS platform.</p>
-        </div>
-        <div class="proj-card">
-          <div class="proj-icon">🔐</div>
-          <div class="proj-name">Shieldpay Secure Payments</div>
-          <p class="proj-desc">Engineered validation for multi-party escrow transfers, ensuring 100% financial integrity across all payment flows.</p>
-        </div>
-        <div class="proj-card">
-          <div class="proj-icon">🏥</div>
-          <div class="proj-name">Bupa Healthcare Claims</div>
-          <p class="proj-desc">Developed validation strategies for insurance claim processing and end-to-end regulatory compliance coverage.</p>
-        </div>
-      </div>
-
-      <div style="margin-top: 32px;" class="r">
-        <p class="eyebrow" style="margin-bottom:16px;">// Open Source Frameworks</p>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
-          <a href="https://github.com/RajatSharan/Playwright_Automation" target="_blank" style="text-decoration:none;">
-            <div class="proj-card" style="display:flex;align-items:center;gap:14px;">
-              <span style="font-size:1.6rem;">🎭</span>
-              <div>
-                <div class="proj-name" style="color:var(--accent);">Playwright Automation ↗</div>
-                <p class="proj-desc">Enterprise E2E · TypeScript · POM · Allure · GitLab CI</p>
-              </div>
-            </div>
-          </a>
-          <a href="https://github.com/RajatSharan/Rest_Assured" target="_blank" style="text-decoration:none;">
-            <div class="proj-card" style="display:flex;align-items:center;gap:14px;">
-              <span style="font-size:1.6rem;">⚡</span>
-              <div>
-                <div class="proj-name" style="color:var(--accent);">REST Assured Architect ↗</div>
-                <p class="proj-desc">Hybrid data-driven API · Java · TestNG · Maven</p>
-              </div>
-            </div>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="certs">
-    <div class="wrap">
-      <p class="eyebrow r">// 04 — Credentials</p>
-      <h2 class="sec-title r">Certifications &amp; <em>Education</em></h2>
-      <div class="cert-grid r">
-        <div class="cert-item">
-          <span class="cert-icon">🏅</span>
-          <div>
-            <div class="cert-name">ISTQB Certified Tester</div>
-            <div class="cert-body">International Software Testing Qualifications Board</div>
-          </div>
-        </div>
-        <div class="cert-item">
-          <span class="cert-icon">🤖</span>
-          <div>
-            <div class="cert-name">Generative AI Fundamentals</div>
-            <div class="cert-body">Applied GenAI for QA workflows &amp; synthetic data</div>
-          </div>
-        </div>
-        <div class="cert-item">
-          <span class="cert-icon">🔁</span>
-          <div>
-            <div class="cert-name">Certified ScrumMaster (CSM)</div>
-            <div class="cert-body">Scrum Alliance · Agile delivery leadership</div>
-          </div>
-        </div>
-        <div class="cert-item">
-          <span class="cert-icon">📦</span>
-          <div>
-            <div class="cert-name">Certified Scrum Product Owner (CSPO)</div>
-            <div class="cert-body">Scrum Alliance · Product &amp; backlog strategy</div>
-          </div>
-        </div>
-      </div>
-      <div class="cert-item r" style="margin-top:14px; max-width:500px;">
-        <span class="cert-icon">🎓</span>
+    <div class="cert-grid rv">
+      <div class="cert-card">
+        <span class="cert-icon">🏅</span>
         <div>
-          <div class="cert-name">B.Tech in Information Technology</div>
-          <div class="cert-body">Arya Institute of Engineering &amp; Technology</div>
+          <div class="cert-name">ISTQB Certified Tester</div>
+          <div class="cert-sub">International Software Testing Qualifications Board</div>
         </div>
+        <span class="cert-badge">VERIFIED</span>
+      </div>
+      <div class="cert-card">
+        <span class="cert-icon">🤖</span>
+        <div>
+          <div class="cert-name">Generative AI Fundamentals</div>
+          <div class="cert-sub">Applied GenAI for QA Workflows &amp; Synthetic Data</div>
+        </div>
+        <span class="cert-badge">VERIFIED</span>
+      </div>
+      <div class="cert-card">
+        <span class="cert-icon">🔁</span>
+        <div>
+          <div class="cert-name">Certified ScrumMaster (CSM)</div>
+          <div class="cert-sub">Scrum Alliance · Agile Delivery Leadership</div>
+        </div>
+        <span class="cert-badge">VERIFIED</span>
+      </div>
+      <div class="cert-card">
+        <span class="cert-icon">📦</span>
+        <div>
+          <div class="cert-name">Certified Scrum Product Owner (CSPO)</div>
+          <div class="cert-sub">Scrum Alliance · Product Strategy</div>
+        </div>
+        <span class="cert-badge">VERIFIED</span>
       </div>
     </div>
-  </section>
 
-  <section id="github">
-    <div class="wrap">
-      <p class="eyebrow r">// 05 — GitHub</p>
-      <h2 class="sec-title r">Live <em>Activity</em></h2>
-      <div class="gh-grid r">
-        <img class="gh-img"
-          src="https://github-readme-stats.vercel.app/api?username=RajatSharan&show_icons=true&theme=tokyonight&count_private=true&hide_border=true&bg_color=0b0f1a"
-          alt="Rajat GitHub Stats" />
-        <img class="gh-img"
-          src="https://github-readme-stats.vercel.app/api/top-langs/?username=RajatSharan&layout=compact&theme=tokyonight&hide_border=true&bg_color=0b0f1a"
-          alt="Top Languages" />
+    <div class="edu-card rv">
+      <span style="font-size:1.5rem">🎓</span>
+      <div>
+        <div class="edu-name">B.Tech — Information Technology</div>
+        <div class="edu-sub">Arya Institute of Engineering &amp; Technology</div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <footer>
-    <div class="wrap">
-      <div class="f-name">RAJAT <span>SHARAN</span></div>
-      <div class="f-links">
-        <a href="https://github.com/RajatSharan" target="_blank">GitHub</a>
-        <a href="https://www.linkedin.com/in/rajatsharan-15a19244" target="_blank">LinkedIn</a>
-        <a href="https://rajatsharan.github.io/Profile/" target="_blank">Portfolio</a>
-        <a href="mailto:errajatsharan@gmail.com">Email</a>
-      </div>
-      <p class="f-copy">© 2025 Rajat Sharan · Lead SDET · Noida, India</p>
+<!-- GITHUB -->
+<section id="github">
+  <div class="container">
+    <p class="sec-label rv">// 05 — Activity</p>
+    <h2 class="sec-title rv">GitHub Stats</h2>
+    <div class="gh-grid rv">
+      <img class="gh-img"
+        src="https://github-readme-stats.vercel.app/api?username=RajatSharan&show_icons=true&theme=default&count_private=true&hide_border=true&bg_color=ffffff&title_color=0f766e&icon_color=0f766e&text_color=334155"
+        alt="GitHub Stats"/>
+      <img class="gh-img"
+        src="https://github-readme-stats.vercel.app/api/top-langs/?username=RajatSharan&layout=compact&theme=default&hide_border=true&bg_color=ffffff&title_color=0f766e&text_color=334155"
+        alt="Top Languages"/>
     </div>
-  </footer>
+  </div>
+</section>
 
-  <script>
-    const els = document.querySelectorAll('.r');
-    const obs = new IntersectionObserver(entries => {
-      entries.forEach((e, i) => {
-        if (e.isIntersecting) {
-          setTimeout(() => e.target.classList.add('v'), i * 70);
-          obs.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.08 });
-    els.forEach(el => obs.observe(el));
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="f-name">Rajat Sharan &nbsp;—&nbsp; <span>Lead SDET</span></div>
+    <div class="f-sub">// Noida, India · errajatsharan@gmail.com · +91-8692985111</div>
+    <div class="f-links">
+      <a href="https://github.com/RajatSharan" target="_blank">GitHub</a>
+      <a href="https://www.linkedin.com/in/rajatsharan-15a19244" target="_blank">LinkedIn</a>
+      <a href="https://rajatsharan.github.io/Profile/" target="_blank">Portfolio</a>
+      <a href="mailto:errajatsharan@gmail.com">Email</a>
+    </div>
+    <div class="f-copy">© 2025 Rajat Sharan · Built for quality engineers, by a quality engineer.</div>
+  </div>
+</footer>
 
-    function counter(el) {
-      const target = +el.dataset.target;
-      const sfx = el.dataset.sfx || '+';
-      let n = 0; const step = target / 55;
-      const t = setInterval(() => {
-        n += step;
-        if (n >= target) { n = target; clearInterval(t); }
-        el.textContent = Math.floor(n) + sfx;
-      }, 22);
-    }
-    const cobs = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) { counter(e.target); cobs.unobserve(e.target); }
-      });
-    }, { threshold: 0.5 });
-    document.querySelectorAll('[data-target]').forEach(el => cobs.observe(el));
-  </script>
+<script>
+  // Clock
+  function tick() {
+    document.getElementById('topbar-clock').textContent =
+      new Date().toLocaleString('en-GB', { hour12: false, dateStyle: 'medium', timeStyle: 'medium' });
+  }
+  setInterval(tick, 1000); tick();
+
+  // Scroll reveal
+  const rvEls = document.querySelectorAll('.rv');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('show'), i * 60);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.07 });
+  rvEls.forEach(el => obs.observe(el));
+
+  // Counters
+  function count(el) {
+    const target = +el.dataset.target;
+    const sfx = el.dataset.sfx || '';
+    let n = 0; const step = target / 50;
+    const t = setInterval(() => {
+      n += step;
+      if (n >= target) { n = target; clearInterval(t); }
+      el.textContent = Math.floor(n) + sfx;
+    }, 22);
+  }
+  const cObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { count(e.target); cObs.unobserve(e.target); }});
+  }, { threshold: 0.5 });
+  document.querySelectorAll('[data-target]').forEach(el => cObs.observe(el));
+
+  // Skill bars
+  const bObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('[data-w]').forEach(b => {
+          setTimeout(() => b.style.width = b.dataset.w + '%', 200);
+        });
+        bObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.skill-list').forEach(el => bObs.observe(el));
+</script>
 </body>
 </html>
