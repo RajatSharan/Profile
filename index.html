@@ -1,146 +1,685 @@
-<!DOCTYPE HTML>
-<html>
-	<head>
-		<title>Rajat Sharan | Lead SDET</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-	</head>
-	<body class="is-preload">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rajat Sharan | Lead SDET & Architect</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #070910;
+      --surface: #0d1117;
+      --panel: #111827;
+      --accent: #00e5ff;
+      --accent2: #7c3aed;
+      --accent3: #f59e0b;
+      --text: #e2e8f0;
+      --muted: #64748b;
+      --border: rgba(0,229,255,0.12);
+      --glow: 0 0 30px rgba(0,229,255,0.18);
+    }
 
-		<div id="wrapper">
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-			<header id="header">
-				<div class="logo">
-					<img src="images/Profile.jpeg" alt="Rajat Sharan" width="auto" style="border-radius: 50%;" />
-				</div>
-				<div class="content">
-					<div class="inner">
-						<h1>Rajat Sharan</h1>
-						<p><strong>Lead SDET | Quality Architect</strong><br />
-						11+ Years Experience | Specializing in Playwright, Cypress & TypeScript<br />
-						CSM® | CSPO® | ISTQB® Certified</p>
-					</div>
-				</div>
-				<nav>
-					<ul>
-						<li><a href="#intro">Intro</a></li>
-						<li><a href="#work">Projects</a></li>
-						<li><a href="#about">About</a></li>
-						<li><a href="#skills">Skills</a></li>
-					</ul>
-				</nav>
-			</header>
+    html { scroll-behavior: smooth; }
 
-			<div id="main">
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Space Mono', monospace;
+      overflow-x: hidden;
+      cursor: none;
+    }
 
-				<article id="intro">
-					<h2 class="major">Introduction</h2>
-					<div align="center">
-						<div style="background-color: #21262d; padding: 10px; border-radius: 6px; border: 1px solid #30363d;">
-							<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&color=00BFFF&width=640&lines=Lead+SDET+|+Quality+Architect;11+Years+of+Automation+Excellence;Expert+in+Playwright+%26+TypeScript;Driving+Quality+at+Enterprise+Scale." alt="Typing SVG" />
-						</div>
-					</div>
-					<br>
-					<p>Strategic <strong>Lead SDET</strong> with a proven track record of architecting scalable automation frameworks and leading high-impact migrations. I specialize in maintaining production stability through advanced CI/CD integration and Shift-Left engineering.</p>
-					<ul>
-						<li>🌱 Currently scaling <strong>Playwright + TypeScript</strong> enterprise frameworks.</li>
-						<li>👨‍💻 Open to collaboration on <strong>AI-augmented testing</strong> and Agentic workflows.</li>
-						<li>💻 Explore my codebase at <a href="https://github.com/RajatSharan"><strong>GitHub</strong></a>.</li>
-					</ul>
-				</article>
+    /* Custom cursor */
+    .cursor {
+      position: fixed; width: 12px; height: 12px;
+      background: var(--accent); border-radius: 50%;
+      pointer-events: none; z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s, opacity 0.2s;
+      mix-blend-mode: screen;
+    }
+    .cursor-ring {
+      position: fixed; width: 36px; height: 36px;
+      border: 1.5px solid var(--accent); border-radius: 50%;
+      pointer-events: none; z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: transform 0.18s ease, width 0.2s, height 0.2s;
+      opacity: 0.5;
+    }
 
-				<article id="work">
-					<h2 class="major">Featured Projects</h2>
-					<section>
-						<h3>🛠️ Automation Frameworks</h3>
-						<div class="table-wrapper">
-							<table>
-								<thead>
-									<tr>
-										<th>Project</th>
-										<th>Stack</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td><a href="https://github.com/RajatSharan/Playwright_Automation"><strong>Playwright Pro</strong></a></td>
-										<td>TypeScript, POM, CI/CD</td>
-									</tr>
-									<tr>
-										<td><a href="https://github.com/RajatSharan/Cypress-Cucumber-frameworks"><strong>BDD Cypress</strong></a></td>
-										<td>JavaScript, Cucumber</td>
-									</tr>
-									<tr>
-										<td><a href="https://github.com/RajatSharan/Rest_Assured"><strong>REST Assured</strong></a></td>
-										<td>Java, API Automation</td>
-									</tr>
-									<tr>
-										<td><a href="https://github.com/RajatSharan/WebDriverIO-Framework"><strong>WebDriverIO</strong></a></td>
-										<td>JavaScript, UI Testing</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</section>
-				</article>
+    /* Animated grid background */
+    .bg-grid {
+      position: fixed; inset: 0; z-index: 0;
+      background-image:
+        linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
+      background-size: 48px 48px;
+      animation: gridDrift 20s linear infinite;
+    }
+    @keyframes gridDrift {
+      from { background-position: 0 0; }
+      to { background-position: 48px 48px; }
+    }
 
-				<article id="about">
-					<h2 class="major">Professional Summary</h2>
-					<p>As a <strong>Lead SDET at Coforge</strong>, I manage high-performance QA teams while remaining hands-on in automation architecture. My expertise spans across FinTech, Aviation, and HealthTech domains.</p>
-					<ul>
-						<li><strong>Migration Lead:</strong> Successfully migrated legacy Cypress suites to Playwright, reducing execution time by 55%.</li>
-						<li><strong>Quality Gates:</strong> Established SonarQube standards reducing defect leakage by 45%.</li>
-						<li><strong>Global Experience:</strong> 2 years onsite in London, UK, handling enterprise-scale releases.</li>
-					</ul>
-					<hr />
-					<h3>Certifications</h3>
-					<p>ISTQB Certified Tester | Certified ScrumMaster (CSM) | Certified Scrum Product Owner (CSPO) | GenAI Fundamentals</p>
-				</article>
+    /* Floating particles */
+    .particles { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+    .particle {
+      position: absolute; width: 2px; height: 2px;
+      background: var(--accent); border-radius: 50%;
+      animation: floatUp linear infinite;
+      opacity: 0;
+    }
+    @keyframes floatUp {
+      0%   { opacity: 0; transform: translateY(0) scale(1); }
+      10%  { opacity: 0.7; }
+      90%  { opacity: 0.3; }
+      100% { opacity: 0; transform: translateY(-100vh) scale(0.3); }
+    }
 
-				<article id="skills">
-					<h2 class="major">Technical Toolkit</h2>
-					<div class="row">
-						<div class="col-6 col-12-small">
-							<h4>Automation</h4>
-							<ul>
-								<li>Playwright & Cypress</li>
-								<li>WebDriverIO & Selenium</li>
-								<li>REST Assured & Postman</li>
-							</ul>
-						</div>
-						<div class="col-6 col-12-small">
-							<h4>DevOps & Tools</h4>
-							<ul>
-								<li>GitLab CI/CD & Jenkins</li>
-								<li>Docker & AWS</li>
-								<li>Jira & TestRail</li>
-							</ul>
-						</div>
-					</div>
-				</article>
+    .container { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 0 32px; }
 
-			</div>
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh; display: flex; align-items: center;
+      padding: 80px 0 60px;
+      position: relative;
+    }
+    .hero-inner { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
 
-			<footer id="footer">
-				<ul class="icons">
-					<li><a href="https://www.linkedin.com/in/rajatsharan-15a19244" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
-					<li><a href="https://github.com/RajatSharan" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
-					<li><a href="mailto:errajatsharan@gmail.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
-				</ul>
-				<p class="copyright">&copy; Rajat Sharan. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
-			</footer>
+    .hero-tag {
+      font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--accent); border: 1px solid var(--border);
+      display: inline-block; padding: 6px 14px; border-radius: 2px;
+      margin-bottom: 24px;
+      animation: fadeInUp 0.6s ease both;
+    }
 
-		</div>
+    .hero-name {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      animation: fadeInUp 0.6s 0.1s ease both;
+    }
+    .hero-name .line1 { display: block; color: var(--text); }
+    .hero-name .line2 { display: block; color: var(--accent); -webkit-text-stroke: 1px var(--accent); color: transparent; }
 
-		<div id="bg"></div>
+    .hero-role {
+      margin-top: 20px;
+      font-size: 14px; color: var(--muted); letter-spacing: 0.05em;
+      animation: fadeInUp 0.6s 0.2s ease both;
+    }
+    .hero-role span { color: var(--accent3); }
 
-		<script src="assets/js/jquery.min.js"></script>
-		<script src="assets/js/browser.min.js"></script>
-		<script src="assets/js/breakpoints.min.js"></script>
-		<script src="assets/js/util.js"></script>
-		<script src="assets/js/main.js"></script>
+    .hero-desc {
+      margin-top: 20px; font-size: 13px; line-height: 1.9;
+      color: #94a3b8; max-width: 420px;
+      animation: fadeInUp 0.6s 0.3s ease both;
+    }
 
-	</body>
+    .hero-cta {
+      margin-top: 36px; display: flex; gap: 16px; flex-wrap: wrap;
+      animation: fadeInUp 0.6s 0.4s ease both;
+    }
+    .btn {
+      font-family: 'Space Mono', monospace;
+      font-size: 12px; letter-spacing: 0.08em;
+      padding: 12px 24px; border-radius: 3px;
+      text-decoration: none; cursor: none;
+      transition: all 0.25s;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-primary {
+      background: var(--accent); color: #000; font-weight: 700;
+    }
+    .btn-primary:hover { background: #fff; box-shadow: 0 0 24px var(--accent); }
+    .btn-ghost {
+      background: transparent; color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* Terminal card on the right */
+    .terminal {
+      background: #0a0f16; border: 1px solid var(--border);
+      border-radius: 8px; overflow: hidden;
+      box-shadow: var(--glow), 0 40px 80px rgba(0,0,0,0.5);
+      animation: fadeInUp 0.6s 0.2s ease both;
+    }
+    .terminal-bar {
+      background: #131a23; padding: 12px 16px;
+      display: flex; align-items: center; gap: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    .dot { width: 12px; height: 12px; border-radius: 50%; }
+    .dot-r { background: #ff5f57; }
+    .dot-y { background: #febc2e; }
+    .dot-g { background: #28c840; }
+    .terminal-title { font-size: 11px; color: var(--muted); margin-left: 8px; letter-spacing: 0.05em; }
+
+    .terminal-body { padding: 24px; font-size: 13px; line-height: 2; }
+    .t-comment { color: #445566; }
+    .t-key { color: var(--accent2); }
+    .t-str { color: var(--accent3); }
+    .t-val { color: var(--accent); }
+    .t-num { color: #f87171; }
+    .t-cursor {
+      display: inline-block; width: 8px; height: 14px;
+      background: var(--accent); vertical-align: middle;
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+    /* ─── STATS ROW ─── */
+    .stats-row {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+      background: var(--border); border: 1px solid var(--border);
+      border-radius: 6px; overflow: hidden; margin: 60px 0;
+    }
+    .stat-cell {
+      background: var(--surface); padding: 32px 20px; text-align: center;
+      transition: background 0.3s;
+    }
+    .stat-cell:hover { background: #111e2e; }
+    .stat-num {
+      font-family: 'Syne', sans-serif; font-size: 2.8rem;
+      font-weight: 800; color: var(--accent);
+      display: block; line-height: 1;
+      text-shadow: 0 0 20px rgba(0,229,255,0.4);
+    }
+    .stat-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-top: 8px; display: block; }
+
+    /* ─── SECTIONS ─── */
+    section { padding: 80px 0; }
+
+    .section-eyebrow {
+      font-size: 10px; letter-spacing: 0.35em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Syne', sans-serif; font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 800; line-height: 1.1; letter-spacing: -0.02em;
+      margin-bottom: 48px;
+    }
+    .section-title em { font-style: normal; color: var(--accent); }
+
+    /* ─── PILLARS ─── */
+    .pillars { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+    .pillar {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 6px; padding: 32px 28px;
+      position: relative; overflow: hidden;
+      transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+    }
+    .pillar::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+    .pillar:hover { transform: translateY(-4px); border-color: rgba(0,229,255,0.3); box-shadow: var(--glow); }
+    .pillar:hover::before { transform: scaleX(1); }
+    .pillar-icon { font-size: 2rem; margin-bottom: 16px; }
+    .pillar-num {
+      position: absolute; top: 20px; right: 24px;
+      font-family: 'Syne', sans-serif; font-size: 3.5rem; font-weight: 800;
+      color: rgba(0,229,255,0.04); line-height: 1;
+    }
+    .pillar h3 { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; }
+    .pillar p { font-size: 12px; color: #94a3b8; line-height: 1.8; }
+
+    /* ─── TECH STACK ─── */
+    .tech-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; }
+    .tech-chip {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 4px; padding: 14px 16px;
+      display: flex; flex-direction: column; gap: 6px;
+      transition: all 0.25s;
+    }
+    .tech-chip:hover { border-color: var(--accent); background: #0d1a26; transform: translateY(-2px); }
+    .tech-chip .t-name { font-size: 12px; font-weight: 700; color: var(--text); }
+    .tech-chip .t-type { font-size: 10px; color: var(--muted); letter-spacing: 0.1em; }
+    .tech-chip .t-bar { height: 2px; background: #1e293b; border-radius: 2px; overflow: hidden; }
+    .tech-chip .t-fill { height: 100%; border-radius: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); }
+
+    /* ─── PROJECTS ─── */
+    .projects { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .proj-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 6px; padding: 28px; position: relative;
+      overflow: hidden; transition: all 0.3s;
+    }
+    .proj-card::after {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(circle at 80% 20%, rgba(0,229,255,0.05), transparent 60%);
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .proj-card:hover { border-color: rgba(0,229,255,0.3); transform: translateY(-3px); box-shadow: var(--glow); }
+    .proj-card:hover::after { opacity: 1; }
+    .proj-tag { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent3); margin-bottom: 10px; }
+    .proj-title { font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; }
+    .proj-desc { font-size: 12px; color: #94a3b8; line-height: 1.8; margin-bottom: 20px; }
+    .proj-stack { display: flex; gap: 8px; flex-wrap: wrap; }
+    .pill {
+      font-size: 10px; padding: 3px 10px; border-radius: 20px;
+      border: 1px solid var(--border); color: var(--muted); letter-spacing: 0.05em;
+    }
+    .proj-link {
+      position: absolute; top: 24px; right: 24px;
+      color: var(--muted); text-decoration: none; font-size: 18px;
+      transition: color 0.2s;
+    }
+    .proj-link:hover { color: var(--accent); }
+
+    /* ─── TIMELINE ─── */
+    .timeline { position: relative; padding-left: 32px; }
+    .timeline::before {
+      content: ''; position: absolute; left: 0; top: 8px; bottom: 0;
+      width: 1px; background: linear-gradient(to bottom, var(--accent), transparent);
+    }
+    .tl-item { position: relative; margin-bottom: 40px; }
+    .tl-dot {
+      position: absolute; left: -36px; top: 6px;
+      width: 9px; height: 9px; border-radius: 50%;
+      border: 2px solid var(--accent); background: var(--bg);
+      box-shadow: 0 0 8px var(--accent);
+    }
+    .tl-date { font-size: 10px; color: var(--accent3); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 4px; }
+    .tl-company { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+    .tl-role { font-size: 12px; color: var(--accent); margin-bottom: 8px; }
+    .tl-desc { font-size: 12px; color: #94a3b8; line-height: 1.8; }
+
+    /* ─── QUOTE ─── */
+    .quote-block {
+      border-left: 3px solid var(--accent); padding: 24px 32px;
+      background: var(--surface); border-radius: 0 6px 6px 0;
+      margin: 60px 0; position: relative;
+    }
+    .quote-block::before {
+      content: '"'; font-family: 'Syne', sans-serif;
+      font-size: 6rem; color: var(--accent); opacity: 0.1;
+      position: absolute; top: -10px; left: 20px; line-height: 1;
+    }
+    .quote-block p { font-size: 16px; line-height: 1.8; font-style: italic; color: #cbd5e1; }
+    .quote-block cite { font-size: 11px; color: var(--muted); margin-top: 10px; display: block; letter-spacing: 0.1em; }
+
+    /* ─── GITHUB STATS ─── */
+    .gh-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .gh-img {
+      width: 100%; border-radius: 6px; border: 1px solid var(--border);
+      transition: box-shadow 0.3s;
+    }
+    .gh-img:hover { box-shadow: var(--glow); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--border); padding: 48px 0;
+      text-align: center;
+    }
+    footer .f-name { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; letter-spacing: -0.02em; }
+    footer .f-name span { color: var(--accent); }
+    footer .f-links { display: flex; gap: 20px; justify-content: center; margin-top: 20px; }
+    footer .f-links a {
+      font-size: 12px; color: var(--muted); text-decoration: none; letter-spacing: 0.1em;
+      transition: color 0.2s;
+    }
+    footer .f-links a:hover { color: var(--accent); }
+    footer .f-copy { font-size: 11px; color: #334155; margin-top: 20px; letter-spacing: 0.1em; }
+
+    /* ─── NAV ─── */
+    nav.topnav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 16px 40px; display: flex; align-items: center;
+      justify-content: space-between;
+      background: rgba(7,9,16,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 800; color: var(--accent); }
+    .nav-links { display: flex; gap: 32px; }
+    .nav-links a { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .reveal {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* Scanline overlay */
+    body::after {
+      content: ''; position: fixed; inset: 0; z-index: 9997;
+      pointer-events: none;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(0,0,0,0.03) 0px, rgba(0,0,0,0.03) 1px,
+        transparent 1px, transparent 2px
+      );
+    }
+
+    @media (max-width: 768px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .stats-row { grid-template-columns: 1fr 1fr; }
+      .pillars { grid-template-columns: 1fr; }
+      .projects { grid-template-columns: 1fr; }
+      .gh-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="ring"></div>
+  <div class="bg-grid"></div>
+  <div class="particles" id="particles"></div>
+
+  <!-- NAV -->
+  <nav class="topnav">
+    <div class="nav-logo">RS_</div>
+    <div class="nav-links">
+      <a href="#strategy">Strategy</a>
+      <a href="#stack">Stack</a>
+      <a href="#projects">Projects</a>
+      <a href="#impact">Impact</a>
+      <a href="#about">About</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <div>
+          <div class="hero-tag">// Lead SDET &amp; Automation Architect</div>
+          <h1 class="hero-name">
+            <span class="line1">RAJAT</span>
+            <span class="line2">SHARAN</span>
+          </h1>
+          <p class="hero-role">
+            TypeScript · Playwright · CI/CD · <span>Agentic AI</span>
+          </p>
+          <p class="hero-desc">
+            I don't just write scripts — I architect <b>Quality Ecosystems</b>. 11+ years turning test chaos into engineered pipelines. Onsite London. Currently crushing quality at Coforge.
+          </p>
+          <div class="hero-cta">
+            <a href="https://www.linkedin.com/in/rajatsharan-15a19244" class="btn btn-primary" target="_blank">↗ LinkedIn</a>
+            <a href="https://rajatsharan.github.io/Profile/" class="btn btn-ghost" target="_blank">View Portfolio</a>
+          </div>
+        </div>
+
+        <!-- TERMINAL -->
+        <div class="terminal">
+          <div class="terminal-bar">
+            <div class="dot dot-r"></div>
+            <div class="dot dot-y"></div>
+            <div class="dot dot-g"></div>
+            <span class="terminal-title">~/rajat-profile $ node whoami.js</span>
+          </div>
+          <div class="terminal-body">
+            <div class="t-comment">// Engineer Profile v2.0</div>
+            <br>
+            <div><span class="t-key">const</span> <span class="t-val">engineer</span> = {</div>
+            <div>&nbsp;&nbsp;<span class="t-key">name</span>: <span class="t-str">"Rajat Sharan"</span>,</div>
+            <div>&nbsp;&nbsp;<span class="t-key">title</span>: <span class="t-str">"Lead SDET"</span>,</div>
+            <div>&nbsp;&nbsp;<span class="t-key">company</span>: <span class="t-str">"Coforge"</span>,</div>
+            <div>&nbsp;&nbsp;<span class="t-key">exp</span>: <span class="t-num">11</span> <span class="t-comment">// years</span>,</div>
+            <div>&nbsp;&nbsp;<span class="t-key">domains</span>: [<span class="t-str">"Aviation"</span>, <span class="t-str">"FinTech"</span>],</div>
+            <div>&nbsp;&nbsp;<span class="t-key">onsite</span>: <span class="t-str">"London 🇬🇧"</span>,</div>
+            <div>&nbsp;&nbsp;<span class="t-key">superpower</span>: <span class="t-str">"AI-Driven QA"</span></div>
+            <div>};</div>
+            <br>
+            <div><span class="t-comment">// ✅ Profile loaded.</span> <span class="t-cursor"></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="container">
+    <div class="stats-row reveal">
+      <div class="stat-cell"><span class="stat-num" data-target="11">0</span><span class="stat-label">Years Experience</span></div>
+      <div class="stat-cell"><span class="stat-num" data-target="95">0</span><span class="stat-label">% Faster Regression</span></div>
+      <div class="stat-cell"><span class="stat-num" data-target="98">0</span><span class="stat-label">% Production Uptime</span></div>
+      <div class="stat-cell"><span class="stat-num" data-target="2">0</span><span class="stat-label">Years London Onsite</span></div>
+    </div>
+  </div>
+
+  <!-- STRATEGY -->
+  <section id="strategy">
+    <div class="container">
+      <p class="section-eyebrow reveal">// 01 — Strategy</p>
+      <h2 class="section-title reveal">Engineering <em>Quality</em><br>at Every Layer</h2>
+      <div class="pillars">
+        <div class="pillar reveal">
+          <span class="pillar-num">01</span>
+          <div class="pillar-icon">⬅</div>
+          <h3>Shift-Left Testing</h3>
+          <p>Integrating quality gates at the commit level. Failures caught in seconds, not sprint reviews. Developer confidence baked in.</p>
+        </div>
+        <div class="pillar reveal">
+          <span class="pillar-num">02</span>
+          <div class="pillar-icon">⚡</div>
+          <h3>Scalable Execution</h3>
+          <p>Containerized parallel test suites on Docker and AWS. Sharding, concurrency, and cloud-native pipelines for zero bottlenecks.</p>
+        </div>
+        <div class="pillar reveal">
+          <span class="pillar-num">03</span>
+          <div class="pillar-icon">🤖</div>
+          <h3>Agentic AI Testing</h3>
+          <p>GenAI for synthetic data generation, self-healing locators, and intelligent test coverage gap analysis. QA meets the future.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TECH STACK -->
+  <section id="stack">
+    <div class="container">
+      <p class="section-eyebrow reveal">// 02 — Arsenal</p>
+      <h2 class="section-title reveal">The <em>Stack</em></h2>
+      <div class="tech-grid reveal">
+        <div class="tech-chip"><span class="t-name">TypeScript</span><span class="t-type">Language</span><div class="t-bar"><div class="t-fill" style="width:96%"></div></div></div>
+        <div class="tech-chip"><span class="t-name">Playwright</span><span class="t-type">E2E Testing</span><div class="t-bar"><div class="t-fill" style="width:98%"></div></div></div>
+        <div class="tech-chip"><span class="t-name">REST Assured</span><span class="t-type">API Testing</span><div class="t-bar"><div class="t-fill" style="width:92%"></div></div></div>
+        <div class="tech-chip"><span class="t-name">GitLab CI</span><span class="t-type">CI/CD</span><div class="t-bar"><div class="t-fill" style="width:90%"></div></div></div>
+        <div class="tech-chip"><span class="t-name">Docker</span><span class="t-type">Containers</span><div class="t-bar"><div class="t-fill" style="width:88%"></div></div></div>
+        <div class="tech-chip"><span class="t-name">AWS</span><span class="t-type">Cloud</span><div class="t-bar"><div class="t-fill" style="width:82%"></div></div></div>
+        <div class="tech-chip"><span class="t-name">Allure</span><span class="t-type">Reporting</span><div class="t-bar"><div class="t-fill" style="width:94%"></div></div></div>
+        <div class="tech-chip"><span class="t-name">GenAI / LLM</span><span class="t-type">AI Testing</span><div class="t-bar"><div class="t-fill" style="width:78%"></div></div></div>
+        <div class="tech-chip"><span class="t-name">Cypress</span><span class="t-type">E2E (Legacy)</span><div class="t-bar"><div class="t-fill" style="width:85%"></div></div></div>
+        <div class="tech-chip"><span class="t-name">Java</span><span class="t-type">Language</span><div class="t-bar"><div class="t-fill" style="width:80%"></div></div></div>
+        <div class="tech-chip"><span class="t-name">Selenium</span><span class="t-type">WebDriver</span><div class="t-bar"><div class="t-fill" style="width:88%"></div></div></div>
+        <div class="tech-chip"><span class="t-name">Jira / Xray</span><span class="t-type">Mgmt</span><div class="t-bar"><div class="t-fill" style="width:92%"></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="container">
+      <p class="section-eyebrow reveal">// 03 — Open Source</p>
+      <h2 class="section-title reveal">Featured <em>Repos</em></h2>
+      <div class="projects">
+        <div class="proj-card reveal">
+          <a class="proj-link" href="https://github.com/RajatSharan/Playwright_Automation" target="_blank">↗</a>
+          <div class="proj-tag">Enterprise Framework</div>
+          <div class="proj-title">Playwright Automation</div>
+          <p class="proj-desc">Production-grade E2E framework with TypeScript, Page Object Model, Allure reporting, and GitLab CI/CD pipeline integration. Built for scale.</p>
+          <div class="proj-stack">
+            <span class="pill">TypeScript</span><span class="pill">Playwright</span><span class="pill">Allure</span><span class="pill">GitLab CI</span>
+          </div>
+        </div>
+        <div class="proj-card reveal">
+          <a class="proj-link" href="https://github.com/RajatSharan/Rest_Assured" target="_blank">↗</a>
+          <div class="proj-tag">API Testing</div>
+          <div class="proj-title">REST Assured Architect</div>
+          <p class="proj-desc">Hybrid data-driven API test framework built with REST Assured. Covers auth flows, schema validation, and chained request patterns.</p>
+          <div class="proj-stack">
+            <span class="pill">Java</span><span class="pill">REST Assured</span><span class="pill">TestNG</span><span class="pill">Maven</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- IMPACT -->
+  <section id="impact">
+    <div class="container">
+      <p class="section-eyebrow reveal">// 04 — Experience</p>
+      <h2 class="section-title reveal">Career <em>Highlights</em></h2>
+      <div class="timeline reveal">
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-date">2022 — Present</div>
+          <div class="tl-company">Coforge · London, UK (Onsite)</div>
+          <div class="tl-role">Senior Test Specialist / Lead SDET</div>
+          <div class="tl-desc">Leading quality engineering for Tier-1 Aviation & FinTech clients. Architected the Playwright migration framework, mentoring 5+ engineers across teams.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-date">2020 — 2022</div>
+          <div class="tl-company">Coforge · India</div>
+          <div class="tl-role">SDET · Automation Engineer</div>
+          <div class="tl-desc">Designed CI/CD-integrated test pipelines with Docker and GitLab. Built reusable API and UI frameworks adopted across multiple projects.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-date">2013 — 2020</div>
+          <div class="tl-company">Various Roles</div>
+          <div class="tl-role">QA Engineer → Sr. QA</div>
+          <div class="tl-desc">7+ years of foundation across functional, automation, performance and security testing disciplines across diverse industry domains.</div>
+        </div>
+      </div>
+
+      <div class="quote-block reveal">
+        <p>Architected a Cypress-to-Playwright migration that reduced release regression cycles from 4 hours to 45 minutes — an 81% improvement delivered within a single sprint.</p>
+        <cite>— Flagship Achievement, Coforge Aviation Client</cite>
+      </div>
+    </div>
+  </section>
+
+  <!-- GITHUB STATS -->
+  <section>
+    <div class="container">
+      <p class="section-eyebrow reveal">// 05 — GitHub Activity</p>
+      <h2 class="section-title reveal">Live <em>Stats</em></h2>
+      <div class="gh-grid reveal">
+        <img class="gh-img"
+          src="https://github-readme-stats.vercel.app/api?username=RajatSharan&show_icons=true&theme=tokyonight&count_private=true&hide_border=true&bg_color=0d1117"
+          alt="Rajat GitHub Stats" />
+        <img class="gh-img"
+          src="https://github-readme-stats.vercel.app/api/top-langs/?username=RajatSharan&layout=compact&theme=tokyonight&hide_border=true&bg_color=0d1117"
+          alt="Top Languages" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <p class="section-eyebrow reveal">// 06 — Human</p>
+      <h2 class="section-title reveal">Who <em>I Am</em></h2>
+      <div style="max-width: 680px;" class="reveal">
+        <p style="font-size:14px; line-height:2; color:#94a3b8; margin-bottom:24px;">
+          I'm a <b style="color:var(--text)">Lead SDET</b> who believes quality is a culture, not a checkbox. With 11+ years in the trenches — from manual QA to architecting full Agentic AI test systems — I bridge the gap between development speed and production confidence.
+        </p>
+        <p style="font-size:14px; line-height:2; color:#94a3b8;">
+          Based in Jaipur, having spent 2 years onsite in <b style="color:var(--text)">London</b> working with Tier-1 clients in Aviation and FinTech. Currently exploring the frontier of <b style="color:var(--accent)">GenAI in QA</b> — self-healing tests, synthetic data, and LLM-assisted coverage analysis.
+        </p>
+        <div class="hero-cta" style="margin-top:32px;">
+          <a href="https://www.linkedin.com/in/rajatsharan-15a19244" class="btn btn-primary" target="_blank">↗ Connect on LinkedIn</a>
+          <a href="https://rajatsharan.github.io/Profile/" class="btn btn-ghost" target="_blank">Full Portfolio</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="f-name">RAJAT <span>SHARAN</span></div>
+      <div class="f-links">
+        <a href="https://github.com/RajatSharan" target="_blank">GitHub</a>
+        <a href="https://www.linkedin.com/in/rajatsharan-15a19244" target="_blank">LinkedIn</a>
+        <a href="https://rajatsharan.github.io/Profile/" target="_blank">Portfolio</a>
+      </div>
+      <p class="f-copy">© 2025 Rajat Sharan · Lead SDET · Built with intention.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Custom cursor
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('ring');
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top  = e.clientY + 'px';
+      setTimeout(() => {
+        ring.style.left = e.clientX + 'px';
+        ring.style.top  = e.clientY + 'px';
+      }, 60);
+    });
+
+    // Particles
+    const container = document.getElementById('particles');
+    for (let i = 0; i < 40; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      p.style.cssText = `
+        left:${Math.random()*100}%;
+        bottom:${Math.random()*20}%;
+        animation-duration:${8+Math.random()*12}s;
+        animation-delay:${Math.random()*10}s;
+        width:${1+Math.random()*2}px;
+        height:${1+Math.random()*2}px;
+        opacity:${0.3+Math.random()*0.5};
+      `;
+      container.appendChild(p);
+    }
+
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), i * 80);
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+
+    // Animated counters
+    function animateCounter(el) {
+      const target = +el.dataset.target;
+      const suffix = el.dataset.suffix || (el.closest('.stat-cell').querySelector('.stat-label').textContent.includes('%') ? '%' : '+');
+      let start = 0;
+      const step = target / 60;
+      const timer = setInterval(() => {
+        start += step;
+        if (start >= target) { start = target; clearInterval(timer); }
+        el.textContent = Math.floor(start) + suffix;
+      }, 24);
+    }
+    const counterObserver = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          animateCounter(e.target);
+          counterObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('[data-target]').forEach(el => counterObserver.observe(el));
+  </script>
+</body>
 </html>
