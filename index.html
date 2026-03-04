@@ -52,7 +52,7 @@ body {
   font-family: 'Fira Code', monospace;
   font-size: 11px;
 }
-.tb-left { display: flex; gap: 20px; align-items: center; color: #64748b; }
+.tb-left { display: flex; gap: 16px; align-items: center; color: #64748b; flex-wrap: wrap; }
 .tb-pass { color: #4ade80; display: flex; align-items: center; gap: 5px; }
 .tb-fail { color: #f87171; display: flex; align-items: center; gap: 5px; }
 .tb-pend { color: #fbbf24; display: flex; align-items: center; gap: 5px; }
@@ -106,7 +106,7 @@ nav {
 .nav-cta:hover { background: #0d6660; }
 
 /* ── LAYOUT ── */
-.container { max-width: 1060px; margin: 0 auto; padding: 0 28px; }
+.container { max-width: 1060px; margin: 0 auto; padding: 0 28px; width: 100%; }
 
 /* ── HERO ── */
 .hero {
@@ -167,6 +167,7 @@ h1 {
   flex-direction: column;
   gap: 8px;
   margin-bottom: 28px;
+  word-break: break-word;
 }
 .c-item {
   display: flex;
@@ -347,7 +348,7 @@ section:last-child { border-bottom: none; }
   font-size: 12px;
 }
 .exp-bullets b { color: var(--text); font-weight: 600; }
-.exp-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+.exp-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; row-gap: 6px; }
 .tag {
   font-family: 'Fira Code', monospace;
   font-size: 10px;
@@ -583,16 +584,125 @@ footer {
 .rv { opacity: 0; transform: translateY(18px); transition: opacity 0.5s ease, transform 0.5s ease; }
 .rv.show { opacity: 1; transform: none; }
 
+/* ══════════════════════════════════════════
+   RESPONSIVE — TABLET  (max 1024px)
+══════════════════════════════════════════ */
+@media(max-width: 1024px) {
+  .container { padding: 0 20px; }
+  .hero { padding: 48px 0 36px; }
+  .hero-grid { grid-template-columns: 1fr; gap: 36px; }
+  .snapshot { max-width: 560px; }
+  .stats-row { grid-template-columns: repeat(4,1fr); }
+  .toolkit-grid { grid-template-columns: 1fr 1fr; }
+  .proj-grid { grid-template-columns: 1fr 1fr; }
+  .cert-grid { grid-template-columns: 1fr 1fr; }
+  .gh-stats-grid { grid-template-columns: 1fr 1fr; }
+  .pinned-grid { grid-template-columns: 1fr 1fr; }
+  nav { padding: 0 20px; }
+  .nav-link { padding: 18px 12px; font-size: 11px; }
+}
+
+/* ══════════════════════════════════════════
+   RESPONSIVE — MOBILE LARGE  (max 768px)
+══════════════════════════════════════════ */
 @media(max-width: 768px) {
-  .hero-grid { grid-template-columns: 1fr; }
-  .stats-row { grid-template-columns: 1fr 1fr; }
-  .toolkit-grid { grid-template-columns: 1fr; }
-  .proj-grid { grid-template-columns: 1fr; }
-  .cert-grid { grid-template-columns: 1fr; }
-  .gh-grid { grid-template-columns: 1fr; }
-  .repo-grid { grid-template-columns: 1fr; }
+  nav { padding: 0 16px; }
   .nav-links { display: none; }
-  h1 { font-size: 2rem; }
+  .nav-logo { font-size: 12px; }
+  .nav-cta { padding: 7px 14px; font-size: 11px; }
+  .topbar { padding: 6px 16px; flex-wrap: wrap; gap: 4px; }
+  .tb-left { gap: 12px; font-size: 10px; }
+  .tb-right { font-size: 10px; }
+  .hero { padding: 40px 0 32px; }
+  .hero-grid { grid-template-columns: 1fr; gap: 28px; }
+  h1 { font-size: 2rem; letter-spacing: -0.02em; }
+  .hero-title-sub { font-size: 0.95rem; }
+  .hero-desc { font-size: 13px; }
+  .hero-badge { font-size: 10px; }
+  .hero-btns { flex-direction: column; gap: 10px; }
+  .hero-btns .btn { justify-content: center; text-align: center; }
+  .contact-list { gap: 6px; }
+  .snapshot { max-width: 100%; }
+  .snap-body { font-size: 11px; padding: 14px 16px; }
+  .stats-row { grid-template-columns: 1fr 1fr; gap: 1px; }
+  .stat-cell { padding: 18px 12px; }
+  .stat-n { font-size: 1.7rem; }
+  .stat-l { font-size: 10px; }
+  .sec-title { font-size: 1.3rem; margin-bottom: 24px; }
+  .exp-card { padding: 18px 16px; }
+  .exp-top { flex-direction: column; gap: 8px; align-items: flex-start; }
+  .exp-company { font-size: 0.95rem; }
+  .exp-bullets li { font-size: 12px; }
+  .achievement { flex-direction: column; gap: 12px; padding: 18px 16px; }
+  .ach-text { font-size: 13px; }
+  .toolkit-grid { grid-template-columns: 1fr; gap: 12px; }
+  .tk-block { padding: 16px 18px; }
+  .skill-list { max-width: 100% !important; }
+  .proj-grid { grid-template-columns: 1fr; gap: 12px; }
+  .repo-grid { grid-template-columns: 1fr; gap: 12px; }
+  .proj-card { padding: 16px; }
+  .cert-grid { grid-template-columns: 1fr; gap: 10px; }
+  .cert-card { padding: 14px 16px; }
+  .cert-badge { font-size: 9px; padding: 2px 7px; }
+  .edu-card { max-width: 100%; padding: 14px 16px; }
+  .gh-profile-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 16px; }
+  .ghp-right { width: 100%; justify-content: space-between; }
+  .ghps-n { font-size: 1.1rem; }
+  .gh-stats-grid { grid-template-columns: 1fr; gap: 12px; }
+  .pinned-grid { grid-template-columns: 1fr; gap: 12px; }
+  .pinned-card { padding: 14px 16px; }
+  .contrib-grid { grid-template-columns: 1fr 1fr; }
+  footer { padding: 32px 0; }
+  .f-links { gap: 14px; flex-wrap: wrap; justify-content: center; }
+  .f-sub { font-size: 10px; }
+}
+
+/* ══════════════════════════════════════════
+   RESPONSIVE — MOBILE SMALL  (max 480px)
+══════════════════════════════════════════ */
+@media(max-width: 480px) {
+  .container { padding: 0 14px; }
+  .tb-right { display: none; }
+  .tb-left { gap: 8px; font-size: 10px; flex-wrap: wrap; }
+  .nav-cta { display: none; }
+  .hero { padding: 28px 0 20px; }
+  h1 { font-size: 1.65rem; }
+  .hero-title-sub { font-size: 0.85rem; }
+  .hero-desc { font-size: 12px; }
+  .hero-badge { font-size: 9px; padding: 4px 10px; }
+  .c-item { font-size: 11px; }
+  .btn { font-size: 12px; padding: 10px 18px; }
+  .stats-row { grid-template-columns: 1fr 1fr; }
+  .stat-n { font-size: 1.4rem; }
+  .stat-l { font-size: 9px; }
+  section { padding: 36px 0; }
+  .sec-title { font-size: 1.1rem; }
+  .sec-label { font-size: 10px; }
+  .exp-card { padding: 14px; }
+  .exp-company { font-size: 0.9rem; }
+  .exp-role { font-size: 11px; }
+  .exp-bullets li { font-size: 11px; gap: 7px; }
+  .snap-body { font-size: 10.5px; line-height: 1.9; padding: 12px 14px; }
+  .snap-run { flex-direction: column; gap: 4px; padding: 10px 14px; font-size: 10px; }
+  .tag, .tk-tag { font-size: 10px; padding: 3px 8px; }
+  .pc-name { font-size: 12px; }
+  .pc-desc { font-size: 11px; }
+  .cert-name { font-size: 12px; }
+  .cert-sub { font-size: 10px; }
+  .ghp-name { font-size: 14px; }
+  .ghp-sub { font-size: 11px; }
+  .ghp-right { gap: 12px; }
+  .ghps-n { font-size: 1rem; }
+  .ghps-l { font-size: 9px; }
+  .ghsc-title { font-size: 12px; }
+  .pin-name { font-size: 12px; }
+  .pin-desc { font-size: 11px; }
+  .contrib-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .contrib-item { padding: 10px; }
+  .contrib-val { font-size: 13px; }
+  .f-name { font-size: 1rem; }
+  .f-links { gap: 12px; }
+  .f-links a { font-size: 11px; }
 }
 </style>
 </head>
@@ -656,7 +766,7 @@ footer {
           </div>
         </div>
         <div class="hero-btns">
-          <a href="https://www.linkedin.com/in/rajatsharan-15a19244" target="_blank" class="btn btn-solid">↗ LinkedIn Profile</a>
+          <a href="https://www.linkedin.com/in/rajat-sharan-15a19244/" target="_blank" class="btn btn-solid">↗ LinkedIn Profile</a>
           <a href="https://rajatsharan.github.io/Profile/" target="_blank" class="btn btn-outline">View Portfolio</a>
         </div>
       </div>
